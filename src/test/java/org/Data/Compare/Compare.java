@@ -24,7 +24,7 @@ public class Compare {
 
         int lastRow = Data.getLastRowNum();
 
-        for (int i = 0; i <= lastRow; i++) {
+        for (int i = 1; i <= lastRow; i++) {
 
             row1 = Data.getRow(i);
 
@@ -64,7 +64,7 @@ public class Compare {
            }
 		sht.add(testData);
 	}
-        System.out.println("*****Sheet*****");
+        System.out.println("*****Datas*****");
         for (TestData val : sht) {
 
         	System.out.print("\t" + val.getID());
@@ -79,97 +79,106 @@ public class Compare {
 	}
 	
 	
-	public void compare(List<TestData> sht1, List<TestData> sht2){
+	public void compare(List<TestData> Sourcevalue, List<TestData> Targetvalue){
 		
 		String Name = null;
 		String Age= null;
         String Id = null;
         String Gender= null;
-        
 		
-        for(TestData sheet1: sht1) {
+        for(TestData Sourcedata: Sourcevalue) {
         	
-        	Name= sheet1.getName();
-        	Id = sheet1.getID();
+        	//Name= sheet1.getName();
+        	Id = Sourcedata.getID();
         	
         	
-        	for (TestData sheet2: sht2) {
+        	for (TestData Targetdata: Targetvalue) 
+        	{        		
         		
-        		if (sheet1.getName().equals(sheet2.getName())) {
-
-                    Name = null;
-
-                    if (sheet1.getID().equals(sheet2.getID())) {
-
-                        Id = null;
+                    if (Sourcedata.getID().equals(Targetdata.getID()))
+                    {
+                    //	Id = Sourcedata.getID(); 
+                      Id = null;
 
                        // if (sheet1.getAge().equals(sheet2.getAge())) {
-                        	
+                      if (!Sourcedata.getName().equals(Targetdata.getName()))
+              		{
+              			Name = Sourcedata.getName(); 
+                        //  Name = null;
+              		}
 
-                            if(!sheet1.getAge().equals(sheet2.getAge())){
-                            	Gender = sheet1.getGender(); 
+                            if(!Sourcedata.getAge().equals(Targetdata.getAge()))
+                            {
+                            	Gender = Sourcedata.getGender(); 
                             }
-                            if(!sheet1.getGender().equals(sheet2.getGender())){
-                            	Age = sheet1.getAge(); 
+                            if(!Sourcedata.getGender().equals(Targetdata.getGender()))
+                            {
+                            	Age = Sourcedata.getAge(); 
                             }
 
-                            if( (sheet1.getName().equals(sheet2.getName())) && (sheet1.getGender().equals(sheet2.getGender())) && (sheet1.getAge().equals(sheet2.getAge()))){
-                                System.out.println("Row No." + (sheet1.getRowNumber()) + " of Sheet 1 is equal to Row No." + (sheet2.getRowNumber()) + " of Sheet 2");
-                                Age = null;
+                            if((Sourcedata.getName().equals(Targetdata.getName())) && (Sourcedata.getGender().equals(Targetdata.getGender())) && (Sourcedata.getAge().equals(Targetdata.getAge())))
+                            {
+                               // System.out.println("ID:" + (Sourcedata.getID()) + " of Source file is equal to ID: " + (Targetdata.getID()) + " of Target file");
+                               
+                            	Name=null;
+                            	Age = null;
                                 Gender= null;
                                
-                                break;
-        		
+                             //break;
                             }
-                        }
-                   // }
-                     
-        		
-        		
-        	}
-        	
-        	
-        }
+                           
+                            
+                            if ( Name!= null) {
+                                System.out.println("######");
+                                System.out.println("For ID:  " + Sourcedata.getID() + " Name (" + Sourcedata.getName() + ") Mismatch in Target");
+                                System.out.println("Updated Name is: "+Targetdata.getName());
+                                System.out.println("######");
+                                Gender = null;
+                                Age = null;
+
+                            }
+
+                            if (Age != null) {
+                                System.out.println("---------");
+                                System.out.println("For ID:  " + Sourcedata.getID() + " Age (" + Sourcedata.getAge() + ") Mismatch in Target");
+                              //  System.out.println("Age has changed under name (" + Sourcedata.getName() + ") and gender (" + Sourcedata.getGender() + ") at ID: " + (Sourcedata.getID()));
+                                System.out.println("Updated age is: "+Targetdata.getAge());
+                                System.out.println("---------");
+
+                            }
+
+                            
+                            if (Gender != null) {
+                                System.out.println("---------");
+                                System.out.println("For ID:  " + Sourcedata.getID() + " Gender (" + Sourcedata.getGender() + ") Mismatch in Target");
+                               // System.out.println("Gender has changed under name (" + Sourcedata.getName() + ") and ID: " + (Sourcedata.getID()));
+                                System.out.println("Updated Gender is: "+Targetdata.getGender());
+                                System.out.println("---------");
+
+                            }
+                            
+                      }
+                    
+          }
 		
-        	if (Id != null) {
-                System.out.println("*****");
-                System.out.println("New Id name (" + sheet1.getName() + ")  listed at Row No." + (sheet1.getRowNumber()));
-                System.out.println("*****");
-                                
+        	 if (Id != null) {
+           		
+                 System.out.println("*****");
+                // System.out.println("New Id name (" + Sourcedata.getName() + ")  listed at ID: " + (Sourcedata.getID()) );
+                 System.out.println("ID: " +Sourcedata.getID() + " Not Available in Target ");
+                // System.out.println("Name has changed under (" + Sourcedata.getName() + ") and ID: " + (Sourcedata.getID()));
+               //  System.out.println("Updated name is: "+Targetvalue.);
+                 System.out.println("*****");
+         		
 
-            }
-
-            
-            if ( Name!= null) {
-                System.out.println("######");
-                System.out.println("New name (" + sheet1.getID() + ") listed under name (" + sheet1.getName() + ") at Row No." + (sheet1.getRowNumber()));
-                System.out.println("######");
-                Gender = null;
-                Age = null;
-
-            }
+             }
 
             
-            if (Age != null) {
-                System.out.println("---------");
-                System.out.println("Age has changed under name (" + sheet1.getName() + ") and gender (" + sheet1.getGender() + ") at Row No." + (sheet1.getRowNumber()));
-                System.out.println("Updated age is: "+sheet1.getAge());
-                System.out.println("---------");
-
-            }
-
-            
-            if (Gender != null) {
-                System.out.println("---------");
-                System.out.println("Gender has changed under name (" + sheet1.getName() + ") and id (" + sheet1.getID() + ") at Row No." + (sheet1.getRowNumber()));
-                System.out.println("Updated Gender is: "+sheet1.getGender());
-                System.out.println("---------");
-
-            }
+          
         }
     }
-		
-}
+	}
+
 	
 
         		

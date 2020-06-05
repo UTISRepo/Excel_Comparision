@@ -13,28 +13,28 @@ public class CallData {
 
         try {
             
-            FileInputStream file1 = new FileInputStream("C:\\Users\\UTIS LAPTOP 54\\Eclispe_Worspace6-DataComparision\\ExcelComparision\\ExcelSheet\\Sheet1.xlsx");
-            FileInputStream file2 = new FileInputStream("C:\\Users\\UTIS LAPTOP 54\\Eclispe_Worspace6-DataComparision\\ExcelComparision\\ExcelSheet\\Sheet2.xlsx");
+            FileInputStream SourceFile = new FileInputStream("E:\\my workspace\\testdb\\CSVSample\\src\\SourceFile.xlsx");
+            FileInputStream TargetFile = new FileInputStream("E:\\my workspace\\testdb\\CSVSample\\src\\TragetFile.xlsx");
 
             
-            XSSFWorkbook workbook1 = new XSSFWorkbook(file1);
-            XSSFWorkbook workbook2 = new XSSFWorkbook(file2);
+            XSSFWorkbook workbook1 = new XSSFWorkbook(SourceFile);
+            XSSFWorkbook workbook2 = new XSSFWorkbook(TargetFile);
 
             
-            XSSFSheet sheet1 = workbook1.getSheetAt(0);
-            XSSFSheet sheet2 = workbook2.getSheetAt(0);
+            XSSFSheet Sourcedata = workbook1.getSheetAt(0);
+            XSSFSheet Targetdata = workbook2.getSheetAt(0);
 
             
             Compare compare = new Compare();
 
             
-            List<TestData> sht1 = compare.getcells(sheet1);
+            List<TestData> Sourcevalue = compare.getcells(Sourcedata);
 
             
-            List<TestData> sht2 = compare.getcells(sheet2);
+            List<TestData> Targetvalue = compare.getcells(Targetdata);
 
             
-            compare.compare(sht1, sht2);
+            compare.compare(Sourcevalue, Targetvalue);
 
 
         } catch (FileNotFoundException e) {
