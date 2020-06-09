@@ -25,7 +25,7 @@ public class CallData {
             XSSFSheet Targetdata = workbook2.getSheetAt(0);
 
             
-            Compare compare = new Compare();
+            newcompare compare = new newcompare();
 
             
             List<TestData> Sourcevalue = compare.getcells(Sourcedata);
